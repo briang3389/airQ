@@ -5,3 +5,7 @@
 /processed_test_data.npy
 /model.pkl
 /data.xlsx
+/processed_train_prediction.npy
+/processed_train_lookback.npy
+/processed_validation_prediction.npy
+/processed_validation_lookback.npy

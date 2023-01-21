@@ -4,24 +4,27 @@ stages:
     cmd: python code/featurization.py
     deps:
     - path: code/featurization.py
-      md5: 99d02dca461877d372a3dcfc45c50ab7
-      size: 1889
-    - path: data/test_data.xlsx
-      md5: ffac951f19d76fa82cd7478ea75e4989
-      size: 1298197
-    - path: data/train_data.xlsx
+      md5: 837189014ad7b44eeadec155211a4985
+      size: 3380
+    - path: data/data.xlsx
       md5: ffac951f19d76fa82cd7478ea75e4989
       size: 1298197
     outs:
     - path: data/norm_params.json
       md5: 14f42e76ae2e9c7f0eba61593087e78e
       size: 10
-    - path: data/processed_test_data.npy
-      md5: 8f99e919c3dfe2adc349aaebf413a3ce
-      size: 5926115
-    - path: data/processed_train_data.npy
-      md5: 8f99e919c3dfe2adc349aaebf413a3ce
-      size: 5926115
+    - path: data/processed_train_lookback.npy
+      md5: 5d0916d4ce3a25bdb486f2eaa4d93015
+      size: 299528
+    - path: data/processed_train_prediction.npy
+      md5: 1f5af6953abdb7abb6205e822e36b648
+      size: 3592928
+    - path: data/processed_validation_lookback.npy
+      md5: 74c74514d1d7e61489a17de842e00871
+      size: 74048
+    - path: data/processed_validation_prediction.npy
+      md5: 1765306d6d22e321dcde0a8dbcc4837b
+      size: 887168
   training:
     cmd: python code/train_model.py
     deps:

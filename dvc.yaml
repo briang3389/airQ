@@ -3,12 +3,13 @@ stages:
     cmd: python code/featurization.py
     deps:
     - code/featurization.py
-    - data/test_data.xlsx
-    - data/train_data.xlsx
+    - data/data.xlsx
     outs:
     - data/norm_params.json
-    - data/processed_test_data.npy
-    - data/processed_train_data.npy
+    - data/processed_train_lookback.npy
+    - data/processed_train_prediction.npy
+    - data/processed_validation_lookback.npy
+    - data/processed_validation_prediction.npy
   training:
     cmd: python code/train_model.py
     deps:

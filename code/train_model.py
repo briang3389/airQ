@@ -18,6 +18,8 @@ optim = optimizer.Adam(model.parameters(), lr=learning_rate)
 
 num_epochs_run = 0
 
+with open(TRAIN_METRIC_JSON,"w") as f:
+  f.write("training metrics")
 
 def train_epoch(dl, epoch):
     print_once = True

@@ -18,7 +18,7 @@ RANDOM_SPLIT_SEED = 1234 # seed for shuffle test train split (if true)
 
 # TRAINING PARAMETERS
 LEARNING_RATE = 0.01  # the learning rate
-N_EPOCHS = 7  # number of epochs
+N_EPOCHS = 3  # number of epochs
 
 # PATH TO ACCESS TRAIN AND VALIDATION DATA
 X_TRAIN_PATH ='./data/processed_train_prediction.npy'
@@ -26,6 +26,7 @@ X_TEST_PATH = './data/processed_train_lookback.npy'
 Y_TRAIN_PATH ='./data/processed_validation_prediction.npy'
 Y_TEST_PATH = './data/processed_validation_lookback.npy'
 MODEL_PATH = "data/model.pkl"
+TRAIN_METRIC_JSON = "metrics/train_metric.json"
 
 
 

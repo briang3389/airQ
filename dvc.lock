@@ -29,18 +29,27 @@ stages:
     cmd: python code/train_model.py
     deps:
     - path: code/train_model.py
-      md5: a68ed4e564145551b25ad33b993d2454
-      size: 1827
-    - path: data/processed_train_data.npy
-      md5: 8f99e919c3dfe2adc349aaebf413a3ce
-      size: 5926115
+      md5: f66943c4bcacf21e2a5db86b112db49e
+      size: 2418
+    - path: data/processed_train_lookback.npy
+      md5: 5c30f50f048b8f35eb7430b1626518bb
+      size: 60008
+    - path: data/processed_train_prediction.npy
+      md5: 411fbd6a7de499c1bcfe87873dd7a082
+      size: 299528
+    - path: data/processed_validation_lookback.npy
+      md5: 8d81bf38fdad8eade0f8d9ad71294fc6
+      size: 15064
+    - path: data/processed_validation_prediction.npy
+      md5: 6e3225129fb4322e550831ca70be5d44
+      size: 74808
     outs:
     - path: data/model.pkl
-      md5: b10a8db164e0754105b7a99be72e3fe5
-      size: 11
+      md5: fadc14efc1ffba81815f088fe6e57aad
+      size: 10153
     - path: metrics/train_metric.json
-      md5: b10a8db164e0754105b7a99be72e3fe5
-      size: 11
+      md5: c369e6c5c1f4152caaa81979df2f64e2
+      size: 16
   eval:
     cmd: python code/eval.py
     deps:

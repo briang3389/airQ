@@ -14,7 +14,10 @@ stages:
     cmd: python code/train_model.py
     deps:
     - code/train_model.py
-    - data/processed_train_data.npy
+    - data/processed_train_lookback.npy
+    - data/processed_train_prediction.npy
+    - data/processed_validation_lookback.npy
+    - data/processed_validation_prediction.npy
     outs:
     - data/model.pkl
     metrics:

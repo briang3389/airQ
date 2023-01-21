@@ -17,7 +17,7 @@ SHUFFLE_TRAIN_TEST_DATA = True  # whether you want to shuffle data during traini
 
 # TRAINING PARAMETERS
 LEARNING_RATE = 0.0001  # the learning rate
-N_EPOCHS = 500  # number of epochs
+N_EPOCHS = 5  # number of epochs
 BATCH_SIZE = 32
 
 # PATH TO ACCESS TRAIN AND VALIDATION DATA

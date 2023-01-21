@@ -40,10 +40,10 @@ def get_data_loaders():
     #valid_x, valid_y = np.load()
     #train_x, train_y = get_data_from(TRAIN_DATA_PATH)
     
-    train_x = np.load('./data/processed_train_prediction')
-    train_y = np.load('./data/processed_train_lookback')
-    valid_x = np.load('./data/processed_validation_prediction')
-    valid_y = np.load('./data/processed_validation_lookback')
+    train_x = np.load('./data/processed_train_prediction.npy')
+    train_y = np.load('./data/processed_train_lookback.npy')
+    valid_x = np.load('./data/processed_validation_prediction.npy')
+    valid_y = np.load('./data/processed_validation_lookback.npy')
 
     valid_ds = air_quality_ds(valid_x, valid_y)
     print("validation batches:", len(valid_ds))

@@ -1,0 +1,15 @@
+artifact_uri: file:///content/AirQ/mlruns/0/a1b46cdd44e3489fb814485909d6e6bd/artifacts
+end_time: 1674337935812
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a1b46cdd44e3489fb814485909d6e6bd
+run_name: unequaled-smelt-886
+run_uuid: a1b46cdd44e3489fb814485909d6e6bd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1674337774475
+status: 3
+tags: []
+user_id: root

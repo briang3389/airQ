@@ -18,8 +18,6 @@ optim = optimizer.Adam(model.parameters(), lr=learning_rate)
 
 num_epochs_run = 0
 
-with open("metrics/train_metric.json", "w") as f:
-    f.write("training metrics")
 
 def train_epoch(dl, epoch):
     print_once = True
@@ -33,10 +31,12 @@ def train_epoch(dl, epoch):
         optim.zero_grad()  # zero gradients
         x = x.to(DEVICE)
         y = y.to(DEVICE)
-
-        if model_name == "seq2seq":
+        #print(x.shape)
+        if model_name == SEQ2SEQ_MODEL_NAME:
             x = x.swapaxes(0, 1)
             y = y.swapaxes(0, 1)
+            #print("swaping axis!")
+        #print(x.shape)
         model_out = model.forward(x)
 
         # squeeze the tensors to account for 1 dim sizes
@@ -75,7 +75,7 @@ def test_epoch(dl, epoch):
 
 
 train_dl, valid_dl = get_data_loaders()
-
+best_val_loss = 1000000
 for e in range(n_epochs):
 
     avg_train_loss = train_epoch(train_dl, e)

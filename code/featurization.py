@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from constants import *
 
 originaldf = pd.read_excel('data/data.xlsx')
 originaldf.replace({-200: np.NaN}, inplace=True)
@@ -11,13 +12,13 @@ for i in range(2, len(list(originaldf.columns))):
 class DataPrep:
     # must contain each one of these labels
     # collumns of interest
-    input_data_cols = ["CO(GT)", "PT08.S1(CO)", "NMHC(GT)"] # add features to end to make itself predict the output col - lstm not limit to 1 feature
+    input_data_cols = INPUT_DATA_COLS # add features to end to make itself predict the output col - lstm not limit to 1 feature
     # input_data_cols = ["sales_amount"]
-    output_data_cols = ["CO(GT)"]
-    percent = 0.8 # test-train split percentage
-    lookback = 20 # number of units used to make prediction
-    predict = 5 # number of units that will be predicted
-    shuffle_train_data = False # whether you want to shuffle data during training or not
+    output_data_cols = OUTPUT_DATA_COLS
+    percent = PERCENT_TEST_TRAIN # test-train split percentage
+    lookback = LOOKBACK # number of units used to make prediction
+    predict = PREDICT # number of units that will be predicted
+    shuffle_train_data = SHUFFLE_TRAIN_TEST_DATA # whether you want to shuffle data during training or not
 
 from sklearn.preprocessing import MinMaxScaler
 
@@ -69,7 +70,7 @@ def split_test_train_data(ts_inp,ts_out,shuffle = False,percent_train = DataPrep
   if shuffle:
     all_data_arr = np.array((ts_inp,ts_out),dtype=object).T
     #print(all_data_arr.shape)
-    np.random.seed(1234)
+    np.random.seed(RANDOM_SPLIT_SEED)
     np.random.shuffle(all_data_arr)
     all_data_arr = all_data_arr.T
     #print(all_data_arr.shape)

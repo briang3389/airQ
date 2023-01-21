@@ -38,11 +38,14 @@ def get_data_from(file_path):
 
 def get_data_loaders():
     
-    train_x = np.load(X_TRAIN_PATH)
-    train_y = np.load(Y_TRAIN_PATH)
-    valid_x = np.load(X_TEST_PATH)
-    valid_y = np.load(Y_TEST_PATH)
-
+    train_x = np.load(X_TRAIN_PATH,allow_pickle=True)
+    train_y = np.load(X_TEST_PATH,allow_pickle=True)
+    valid_x = np.load(Y_TRAIN_PATH,allow_pickle=True)
+    valid_y = np.load(Y_TEST_PATH,allow_pickle=True)
+    print(train_x.shape)
+    print(train_y.shape)
+    print(valid_x.shape)
+    print(valid_y.shape)
     valid_ds = air_quality_ds(valid_x, valid_y)
     print("validation batches:", len(valid_ds))
 
@@ -60,4 +63,4 @@ def get_data_loaders():
     print("====Validation DS====")
     disp_ds_info(valid_dl, 4)
 
-    return train_ds, valid_ds
+    return train_dl, valid_dl

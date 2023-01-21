@@ -1,0 +1,15 @@
+artifact_uri: file:///content/AirQ/mlruns/0/6d9f9b801c6443aebd0ca998cf2be68a/artifacts
+end_time: 1674337728230
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 6d9f9b801c6443aebd0ca998cf2be68a
+run_name: funny-swan-995
+run_uuid: 6d9f9b801c6443aebd0ca998cf2be68a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1674337724014
+status: 4
+tags: []
+user_id: root

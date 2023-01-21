@@ -21,9 +21,9 @@ N_EPOCHS = 500  # number of epochs
 BATCH_SIZE = 32
 
 # PATH TO ACCESS TRAIN AND VALIDATION DATA
-VALID_DATA_PATH = "/path/to/valid/data/file"
-TRAIN_DATA_PATH = "/path/to/valid/data/file"
-MODEL_PATH = "path/to/save/data/file"
+#VALID_DATA_PATH = "/path/to/valid/data/file"
+#TRAIN_DATA_PATH = "/path/to/valid/data/file"
+MODEL_PATH = "data/model.pkl"
 
 # MODEL PARAMETERS
 LSTM_INPUT_SIZE = INPUT_DATA_FEATURES

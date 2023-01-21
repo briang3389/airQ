@@ -1,63 +1,82 @@
-"""
-Train classification model for MNIST
-"""
-import json
-import pickle
-import numpy as np
-from sklearn.svm import SVC
-from sklearn.multiclass import OneVsRestClassifier
-import time
+import torch.optim as optimizer
+from arch import *
+from constants import *
+from data_prep import *
+
+train_loss = []  # track training loss
+valid_loss = []  # track validation loss
+learning_rate = LEARNING_RATE  # the learning rate
+n_epochs = N_EPOCHS  # number of epochs
+
+# model = lstm().to(device)
+model = seq2seq().to(DEVICE)
+model_name = model.model_name
+
+print(model_name)
+loss_func = nn.MSELoss()
+optim = optimizer.Adam(model.parameters(), lr=learning_rate)
+
+num_epochs_run = 0
 
 
-def train_model():
-    '''
-    # Measure training time
-    start_time = time.time()
+def train_epoch(dl, epoch):
+    print_once = True
+    model.train(True)
 
-    # Load training data
-    print("Load training data...")
-    train_data = np.load('./data/processed_train_data.npy')
+    epoch_train_loss = 0.
+    # loop over training batches
+    times_run = 0
 
-    # Choose a random sample of images from the training data.
-    # This is important since SVM training time increases quadratically with the number of training samples.
-    print("Choosing smaller sample to shorten training time...")
-    # Set a random seed so that we get the same "random" choices when we try to recreate the experiment.
-    np.random.seed(42)
+    for i, (x, y) in enumerate(dl):
+        optim.zero_grad()  # zero gradients
+        x = x.to(DEVICE)
+        y = y.to(DEVICE)
 
-    num_samples = 5000
-    choice = np.random.choice(train_data.shape[0], num_samples, replace=False)
-    train_data = train_data[choice, :]
+        if model_name == "seq2seq":
+            x = x.swapaxes(0, 1)
+            y = y.swapaxes(0, 1)
+        model_out = model.forward(x)
 
-    # Divide loaded data-set into data and labels
-    labels = train_data[:, 0]
-    data = train_data[:, 1:]
-    print("done.")
+        # squeeze the tensors to account for 1 dim sizes
+        model_out = model_out.squeeze()
+        y = y.squeeze()
 
-    # Define SVM classifier and train model
-    print("Training model...")
-    model = OneVsRestClassifier(SVC(kernel='linear'), n_jobs=6)
-    model.fit(data, labels)
-    print("done.")
+        loss = loss_func(model_out, y)
+        epoch_train_loss += loss.item() * x.size(0)
 
-    # Save model as pkl
-    print("Save model and training time metric...")
-    with open("./data/model.pkl", 'wb') as f:
-        pickle.dump(model, f)
+        times_run += x.size(0)
 
-    # End training time measurement
-    end_time = time.time()
+        # compute the loss
+        loss.backward()
+        # step the optimizer
+        optim.step()
 
-    # Create metric for model training time
-    with open('./metrics/train_metric.json', 'w') as f:
-        json.dump({'training_time': end_time - start_time}, f)
-    print("done.")
-    '''
-    with open("metrics/train_metric.json", "w") as f:
-        f.write("Hello World")
-    with open("data/model.pkl", "w") as f:
-        f.write("Hello World")
+    return epoch_train_loss / times_run
 
 
-if __name__ == '__main__':
-    train_model()
+def test_epoch(dl, epoch):
+    model.train(False)
+    epoch_test_loss = 0.
+    times_run = 0
+    # loop over testing batches
+    for i, (x, y) in enumerate(dl):
+        model_out = model(x)
+        # squeeze tensors to account for 1 dim sizes
+        model_out = model_out.squeeze()
+        y = y.squeeze()
 
+        loss = loss_func(model_out, y)
+        epoch_test_loss += loss.item() * x.size(0)
+        times_run += x.size(0)
+
+    return epoch_test_loss / times_run
+
+
+for e in range(n_epochs):
+    train_dl, valid_dl = get_data_loaders()
+    avg_train_loss = train_epoch(train_dl, e)
+    avg_valid_epoch = train_epoch(valid_dl, e)
+    num_epochs_run += 1
+    train_loss.append(avg_train_loss)
+    valid_loss.append(avg_valid_epoch)
+    print(f"epoch {e}: avg train loss: {avg_train_loss} avg val loss: {avg_valid_epoch}")

@@ -4,3 +4,4 @@
 /processed_train_data.npy
 /processed_test_data.npy
 /model.pkl
+/data.xlsx

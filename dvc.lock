@@ -1,0 +1,40 @@
+schema: '2.0'
+stages:
+  featurization:
+    cmd: python code/featurization.py
+    deps:
+    - path: code/featurization.py
+      md5: 42675194b3fd336b418652b10c73ea86
+      size: 1592
+    - path: data/test_data.xlsx
+      md5: ffac951f19d76fa82cd7478ea75e4989
+      size: 1298197
+    - path: data/train_data.xlsx
+      md5: ffac951f19d76fa82cd7478ea75e4989
+      size: 1298197
+    outs:
+    - path: data/norm_params.json
+      md5: b10a8db164e0754105b7a99be72e3fe5
+      size: 11
+    - path: data/processed_test_data.npy
+      md5: b10a8db164e0754105b7a99be72e3fe5
+      size: 11
+    - path: data/processed_train_data.npy
+      md5: b10a8db164e0754105b7a99be72e3fe5
+      size: 11
+  training:
+    cmd: python code/train_model.py
+    deps:
+    - path: code/train_model.py
+      md5: a68ed4e564145551b25ad33b993d2454
+      size: 1827
+    - path: data/processed_train_data.npy
+      md5: b10a8db164e0754105b7a99be72e3fe5
+      size: 11
+    outs:
+    - path: data/model.pkl
+      md5: b10a8db164e0754105b7a99be72e3fe5
+      size: 11
+    - path: metrics/train_metric.json
+      md5: b10a8db164e0754105b7a99be72e3fe5
+      size: 11

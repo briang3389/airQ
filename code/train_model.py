@@ -72,11 +72,17 @@ def test_epoch(dl, epoch):
     return epoch_test_loss / times_run
 
 
+train_dl, valid_dl = get_data_loaders()
+
 for e in range(n_epochs):
-    train_dl, valid_dl = get_data_loaders()
+
     avg_train_loss = train_epoch(train_dl, e)
-    avg_valid_epoch = train_epoch(valid_dl, e)
+    avg_valid_loss = train_epoch(valid_dl, e)
     num_epochs_run += 1
     train_loss.append(avg_train_loss)
-    valid_loss.append(avg_valid_epoch)
-    print(f"epoch {e}: avg train loss: {avg_train_loss} avg val loss: {avg_valid_epoch}")
+    valid_loss.append(avg_valid_loss)
+    print(f"epoch {e}: avg train loss: {avg_train_loss} avg val loss: {avg_valid_loss}")
+
+    if avg_valid_loss < best_val_loss:
+        best_val_loss = avg_valid_loss
+        torch.save(model, MODEL_PATH)

@@ -19,3 +19,12 @@ stages:
     metrics:
     - metrics/train_metric.json:
         cache: false
+  eval:
+    cmd: python code/eval.py
+    deps:
+    - code/eval.py
+    - data/model.pkl
+    - data/processed_test_data.npy
+    metrics:
+    - metrics/eval.json:
+        cache: false

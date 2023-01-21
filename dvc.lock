@@ -38,3 +38,19 @@ stages:
     - path: metrics/train_metric.json
       md5: b10a8db164e0754105b7a99be72e3fe5
       size: 11
+  eval:
+    cmd: python code/eval.py
+    deps:
+    - path: code/eval.py
+      md5: 29e6603b18d58125e6a4a209771a1637
+      size: 1067
+    - path: data/model.pkl
+      md5: b10a8db164e0754105b7a99be72e3fe5
+      size: 11
+    - path: data/processed_test_data.npy
+      md5: b10a8db164e0754105b7a99be72e3fe5
+      size: 11
+    outs:
+    - path: metrics/eval.json
+      md5: b10a8db164e0754105b7a99be72e3fe5
+      size: 11

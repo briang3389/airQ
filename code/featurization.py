@@ -2,6 +2,11 @@ import pandas as pd
 import numpy as np
 
 originaldf = pd.read_excel('data/data.xlsx')
+originaldf.replace({-200: np.NaN}, inplace=True)
+originaldf.replace({'-200': np.NaN}, inplace=True)
+#originaldf.interpolate(method='linear', inplace=True)
+for i in range(2, len(list(originaldf.columns))):
+    originaldf[list(originaldf.columns)[i]] = originaldf[list(originaldf.columns)[i]].interpolate()
 
 class DataPrep:
     # must contain each one of these labels

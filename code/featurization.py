@@ -1,51 +1,54 @@
-"""
-Create feature CSVs for train and test datasets
-"""
-import json
-import numpy as np
 import pandas as pd
+import numpy as np
 
+originaldf = pd.read_excel('data/train_data.xlsx')
 
-def featurization():
-    '''
-    # Load data-sets
-    print("Loading data sets...")
-    train_data = pd.read_csv('./data/train_data.csv', header=None, dtype=float)
-    test_data = pd.read_csv('./data/test_data.csv', header=None, dtype=float)
-    print("done.")
+class DataPrep:
+    # must contain each one of these labels
+    # collumns of interest
+    input_data_cols = ["CO(GT)", "PT08.S1(CO)", "NMHC(GT)"] # add features to end to make itself predict the output col - lstm not limit to 1 feature
+    # input_data_cols = ["sales_amount"]
+    output_data_cols = ["CO(GT)"]
+    percent = 0.8 # test-train split percentage
+    lookback = 20 # number of units used to make prediction
+    predict = 5 # number of units that will be predicted
 
-    # Normalize the train data
-    print("Normalizing data...")
-    # We choose all columns except the first, since that is where our labels are
-    train_mean = train_data.values[:, 1:].mean()
-    train_std = train_data.values[:, 1:].std()
+from sklearn.preprocessing import MinMaxScaler
 
-    # Normalize train and test data according to the train data distribution
-    train_data.values[:, 1:] -= train_mean
-    train_data.values[:, 1:] /= train_std
-    test_data.values[:, 1:] -= train_mean
-    test_data.values[:, 1:] /= train_std
+scaler = MinMaxScaler()
+df = originaldf.copy()
+df[DataPrep.input_data_cols] = scaler.fit_transform(originaldf[DataPrep.input_data_cols])
 
-    print("done.")
+'''
+import matplotlib.pyplot as plt
+plt.plot(originaldf["CO(GT)"])
+plt.show()
 
-    print("Saving processed datasets and normalization parameters...")
-    # Save normalized data-sets
-    np.save('./data/processed_train_data', train_data)
-    np.save('./data/processed_test_data', test_data)
+plt.plot(df["CO(GT)"])
+plt.show()
 
-    # Save mean and std for future inference
-    with open('./data/norm_params.json', 'w') as f:
-        json.dump({'mean': train_mean, 'std': train_std}, f)
+testdf = df.copy()
+testdf[DataPrep.input_data_cols] = scaler.inverse_transform(df[DataPrep.input_data_cols])
+plt.plot(testdf["CO(GT)"])
+plt.show()
+'''
 
-    print("done.")
-    '''
-    with open("data/processed_train_data.npy", "w") as f:
-        f.write("Hello World")
-    with open("data/processed_test_data.npy", "w") as f:
-        f.write("Hello World")
-    with open("data/norm_params.json", "w") as f:
-        f.write("Hello World")
-        
+print("number of rows: " + str(len(df.index)))
 
-if __name__ == '__main__':
-    featurization()
+inputcolsdf = df[DataPrep.input_data_cols].copy()
+outputcolsdf = df[DataPrep.output_data_cols].copy()
+dataSetInput = []
+dataSetOutput = []
+for i in range(len(df.index)-(DataPrep.lookback+DataPrep.predict-1)):
+  #print(i, " ", i+DataPrep.lookback, " ", i+DataPrep.lookback+DataPrep.predict)
+  dataSetInput.append(inputcolsdf.iloc[list(range(i, i+DataPrep.lookback)),:].to_numpy())
+  dataSetOutput.append(outputcolsdf.iloc[list(range(i+DataPrep.lookback, i+DataPrep.lookback+DataPrep.predict)),:].to_numpy())
+
+train_data = np.asarray([dataSetInput, dataSetOutput], dtype=object)
+test_data = np.asarray([dataSetInput, dataSetOutput], dtype=object)
+
+np.save('./data/processed_train_data', train_data)
+np.save('./data/processed_test_data', test_data)
+
+with open("data/norm_params.json", "w") as f:
+    f.write("normalized")

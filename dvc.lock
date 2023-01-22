@@ -1,0 +1,64 @@
+schema: '2.0'
+stages:
+  featurization:
+    cmd: python src/featurization.py
+    deps:
+    - path: data/AirQualityUCI.xlsx
+      md5: ffac951f19d76fa82cd7478ea75e4989
+      size: 1298197
+    - path: src/constants.py
+      md5: 9dbb467e50d0eeab35671be59738fa69
+      size: 2536
+    - path: src/featurization.py
+      md5: b384e6eb735e6d0ee0e757603d105617
+      size: 3748
+    outs:
+    - path: data/processed_train_lookback.npy
+      md5: 5c30f50f048b8f35eb7430b1626518bb
+      size: 60008
+    - path: data/processed_train_prediction.npy
+      md5: 411fbd6a7de499c1bcfe87873dd7a082
+      size: 299528
+    - path: data/processed_validation_lookback.npy
+      md5: 8d81bf38fdad8eade0f8d9ad71294fc6
+      size: 15064
+    - path: data/processed_validation_prediction.npy
+      md5: 6e3225129fb4322e550831ca70be5d44
+      size: 74808
+  train_model:
+    cmd: python src/train_model.py
+    deps:
+    - path: data/processed_train_lookback.npy
+      md5: 5c30f50f048b8f35eb7430b1626518bb
+      size: 60008
+    - path: data/processed_train_prediction.npy
+      md5: 411fbd6a7de499c1bcfe87873dd7a082
+      size: 299528
+    - path: data/processed_validation_lookback.npy
+      md5: 8d81bf38fdad8eade0f8d9ad71294fc6
+      size: 15064
+    - path: data/processed_validation_prediction.npy
+      md5: 6e3225129fb4322e550831ca70be5d44
+      size: 74808
+    - path: src/arch.py
+      md5: 86290458713d33436dbb1d776780ac38
+      size: 7764
+    - path: src/constants.py
+      md5: ed55b50a45705c59448116ae5495ab74
+      size: 2585
+    - path: src/data_prep.py
+      md5: 4b32dfce76aea22d3b7096f4de2afba8
+      size: 1855
+    - path: src/train_model.py
+      md5: 5bf03699e60efb1d1df5e7b48a2deb61
+      size: 2538
+    outs:
+    - path: data/model.pkl
+      md5: 0b600011414f8f6c66ce4ed43ef6a1f5
+      size: 9597
+    - path: model.csv
+      md5: 3cb95cfbe1035bce8c448fcaf80fe7d9
+      size: 11
+    - path: params.yml
+      md5: 5d41402abc4b2a76b9719d911017c592
+      size: 5

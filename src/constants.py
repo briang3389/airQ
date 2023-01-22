@@ -27,8 +27,10 @@ Y_TRAIN_PATH ='./data/processed_validation_prediction.npy'
 Y_TEST_PATH = './data/processed_validation_lookback.npy'
 MODEL_PATH = "data/model.pkl"
 TRAIN_METRIC_JSON = "metrics/train_metric.json"
+ALL_DATA_PATH = "/content/airQ/data/AirQualityUCI.xlsx"
 
-
+MODEL_CSV = "model.csv"
+PARAM_YML = "params.yml"
 
 # MODEL PARAMETERS
 LSTM_INPUT_SIZE = INPUT_DATA_FEATURES

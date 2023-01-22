@@ -1,0 +1,7 @@
+/AirQualityUCI.xlsx
+/AirQualityUCI.csv
+/processed_train_lookback.npy
+/processed_train_prediction.npy
+/processed_validation_lookback.npy
+/processed_validation_prediction.npy
+/model.pkl

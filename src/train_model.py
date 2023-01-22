@@ -18,8 +18,8 @@ optim = optimizer.Adam(model.parameters(), lr=learning_rate)
 
 num_epochs_run = 0
 
-with open(TRAIN_METRIC_JSON,"w") as f:
-  f.write("training metrics")
+# with open(TRAIN_METRIC_JSON,"w") as f:
+#   f.write("training metrics")
 
 def train_epoch(dl, epoch):
     print_once = True
@@ -78,6 +78,15 @@ def test_epoch(dl, epoch):
 
 train_dl, valid_dl = get_data_loaders()
 best_val_loss = 1000000
+
+f = open("model.csv", "w")
+f.write("hello,world")
+f.close
+
+f = open("params.yml", "w")
+f.write("hello")
+f.close
+
 for e in range(n_epochs):
 
     avg_train_loss = train_epoch(train_dl, e)
@@ -90,3 +99,4 @@ for e in range(n_epochs):
     if avg_valid_loss < best_val_loss:
         best_val_loss = avg_valid_loss
         torch.save(model, MODEL_PATH)
+

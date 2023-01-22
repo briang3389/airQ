@@ -7,7 +7,7 @@ stages:
       md5: ffac951f19d76fa82cd7478ea75e4989
       size: 1298197
     - path: src/constants.py
-      md5: 23b8f4ce32442396cd453ae1b9f8c43e
+      md5: 20b962b4c21ea7ebcdd5cc13100b64fb
       size: 2977
     - path: src/featurization.py
       md5: b384e6eb735e6d0ee0e757603d105617
@@ -17,14 +17,14 @@ stages:
       md5: 5c30f50f048b8f35eb7430b1626518bb
       size: 60008
     - path: data/processed_train_prediction.npy
-      md5: 411fbd6a7de499c1bcfe87873dd7a082
-      size: 299528
+      md5: f491fd46a85276568af41e94a2d76080
+      size: 898328
     - path: data/processed_validation_lookback.npy
       md5: 8d81bf38fdad8eade0f8d9ad71294fc6
       size: 15064
     - path: data/processed_validation_prediction.npy
-      md5: 6e3225129fb4322e550831ca70be5d44
-      size: 74808
+      md5: 0a6fcb0099e3f6cebad3f1c1fda4578a
+      size: 224168
   train_model:
     cmd: python src/train_model.py
     deps:
@@ -32,19 +32,19 @@ stages:
       md5: 5c30f50f048b8f35eb7430b1626518bb
       size: 60008
     - path: data/processed_train_prediction.npy
-      md5: 411fbd6a7de499c1bcfe87873dd7a082
-      size: 299528
+      md5: f491fd46a85276568af41e94a2d76080
+      size: 898328
     - path: data/processed_validation_lookback.npy
       md5: 8d81bf38fdad8eade0f8d9ad71294fc6
       size: 15064
     - path: data/processed_validation_prediction.npy
-      md5: 6e3225129fb4322e550831ca70be5d44
-      size: 74808
+      md5: 0a6fcb0099e3f6cebad3f1c1fda4578a
+      size: 224168
     - path: src/arch.py
       md5: 86290458713d33436dbb1d776780ac38
       size: 7764
     - path: src/constants.py
-      md5: 23b8f4ce32442396cd453ae1b9f8c43e
+      md5: 20b962b4c21ea7ebcdd5cc13100b64fb
       size: 2977
     - path: src/data_prep.py
       md5: 4b32dfce76aea22d3b7096f4de2afba8
@@ -54,8 +54,8 @@ stages:
       size: 2829
     outs:
     - path: data/model.pkl
-      md5: a1dc486e1ce2ff145d33e4eda6790a67
-      size: 9597
+      md5: 646cdad7ff88e1930d6a30bae232bdd4
+      size: 9853
     - path: model.csv
       md5: 3cb95cfbe1035bce8c448fcaf80fe7d9
       size: 11

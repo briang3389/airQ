@@ -3,9 +3,9 @@ import torch
 from pathlib import Path
 
 # DATA PARARMETERS
-INPUT_DATA_COLS = ["CO(GT)"]
+#INPUT_DATA_COLS = ["CO(GT)"]
 # add features to end to make itself predict the output col - lstm not limit to 1 feature
-#INPUT_DATA_COLS = ["CO(GT)", "PT08.S1(CO)", "NMHC(GT)"]
+INPUT_DATA_COLS = ["CO(GT)", "PT08.S1(CO)", "NMHC(GT)"]
 INPUT_DATA_FEATURES = len(INPUT_DATA_COLS)
 OUTPUT_DATA_COLS = ["CO(GT)"]
 OUTPUT_DATA_FEATURES = len(OUTPUT_DATA_COLS)

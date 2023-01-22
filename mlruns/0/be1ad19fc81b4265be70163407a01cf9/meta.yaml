@@ -1,0 +1,15 @@
+artifact_uri: file:///content/airQ/mlruns/0/be1ad19fc81b4265be70163407a01cf9/artifacts
+end_time: 1674357750989
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: be1ad19fc81b4265be70163407a01cf9
+run_name: useful-flea-421
+run_uuid: be1ad19fc81b4265be70163407a01cf9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1674357735022
+status: 3
+tags: []
+user_id: root

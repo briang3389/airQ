@@ -14,6 +14,9 @@ stages:
     cmd: python code/train_model.py
     deps:
     - code/train_model.py
+    - code/arch.py
+    - code/constants.py
+    - code/data_prep.py
     - data/processed_train_lookback.npy
     - data/processed_train_prediction.npy
     - data/processed_validation_lookback.npy
@@ -28,7 +31,8 @@ stages:
     deps:
     - code/eval.py
     - data/model.pkl
-    - data/processed_test_data.npy
+    - data/processed_validation_lookback.npy
+    - data/processed_validation_prediction.npy
     metrics:
     - metrics/eval.json:
         cache: false

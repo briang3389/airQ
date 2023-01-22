@@ -4,8 +4,8 @@ stages:
     cmd: python code/featurization.py
     deps:
     - path: code/featurization.py
-      md5: 837189014ad7b44eeadec155211a4985
-      size: 3380
+      md5: 9a5f167d913f1fc58b7d8b2277773a31
+      size: 3852
     - path: data/data.xlsx
       md5: ffac951f19d76fa82cd7478ea75e4989
       size: 1298197
@@ -28,21 +28,30 @@ stages:
   training:
     cmd: python code/train_model.py
     deps:
+    - path: code/arch.py
+      md5: 86290458713d33436dbb1d776780ac38
+      size: 7962
+    - path: code/constants.py
+      md5: dccfc64b54906c69822ca3954c84f6ac
+      size: 2549
+    - path: code/data_prep.py
+      md5: 4b32dfce76aea22d3b7096f4de2afba8
+      size: 1921
     - path: code/train_model.py
       md5: f66943c4bcacf21e2a5db86b112db49e
-      size: 2418
+      size: 2509
     - path: data/processed_train_lookback.npy
-      md5: 5c30f50f048b8f35eb7430b1626518bb
-      size: 60008
-    - path: data/processed_train_prediction.npy
-      md5: 411fbd6a7de499c1bcfe87873dd7a082
+      md5: 5d0916d4ce3a25bdb486f2eaa4d93015
       size: 299528
+    - path: data/processed_train_prediction.npy
+      md5: 1f5af6953abdb7abb6205e822e36b648
+      size: 3592928
     - path: data/processed_validation_lookback.npy
-      md5: 8d81bf38fdad8eade0f8d9ad71294fc6
-      size: 15064
+      md5: 74c74514d1d7e61489a17de842e00871
+      size: 74048
     - path: data/processed_validation_prediction.npy
-      md5: 6e3225129fb4322e550831ca70be5d44
-      size: 74808
+      md5: 1765306d6d22e321dcde0a8dbcc4837b
+      size: 887168
     outs:
     - path: data/model.pkl
       md5: fadc14efc1ffba81815f088fe6e57aad
@@ -57,11 +66,14 @@ stages:
       md5: 29e6603b18d58125e6a4a209771a1637
       size: 1067
     - path: data/model.pkl
-      md5: b10a8db164e0754105b7a99be72e3fe5
-      size: 11
-    - path: data/processed_test_data.npy
-      md5: 8f99e919c3dfe2adc349aaebf413a3ce
-      size: 5926115
+      md5: fadc14efc1ffba81815f088fe6e57aad
+      size: 10153
+    - path: data/processed_validation_lookback.npy
+      md5: 74c74514d1d7e61489a17de842e00871
+      size: 74048
+    - path: data/processed_validation_prediction.npy
+      md5: 1765306d6d22e321dcde0a8dbcc4837b
+      size: 887168
     outs:
     - path: metrics/eval.json
       md5: b10a8db164e0754105b7a99be72e3fe5

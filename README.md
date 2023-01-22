@@ -30,9 +30,12 @@ Air-quality prediction and analysis framework using LSTMs and seq2seqs (transfor
 - Contains following notebooks:
     - `main.ipynb`: Google Collab demo of all model files (no dvc/MLflow/git)
     - `dagshub_config.ipynb`: Config Notesbook to run model through DVC/Mlflow/git!
+    - `dagshub_run.ipynb`: Demo File for running and training model using DagsHub!
 
 ## Configuration
 
-Open `dagshub_config.ipynb` and run in Collab!
+Open `src/dagshub_run.ipynb` and run in Collab!
+
+Make sure you have a Dagshub account and copy your MLFlow link (where you would copy github URL)
 
 

@@ -24,12 +24,15 @@ Air-quality prediction and analysis framework using LSTMs and seq2seqs (transfor
 - Contains following model files:
     - `arch.ph`: seq2seq and lstm model implementation 
     - `constants.py`: Control hyperparameters for data feature extraction and training (ie epochs, input features)
-    - `data_prep.py': Extracts testing and training data, placing it in Dataloaders and Datasets
+    - `data_prep.py`: Extracts testing and training data, placing it in Dataloaders and Datasets
     - `featurization.py`: Generates test and train .npy arrays, normalizes data, interpolates data
     - `train_model.py`: main training script, contions training loop, optimizer, scheduler
 - Contains following notebooks:
     - `main.ipynb`: Google Collab demo of all model files (no dvc/MLflow/git)
     - `dagshub_config.ipynb`: Config Notesbook to run model through DVC/Mlflow/git!
 
+## Configuration
+
+Open `dagshub_config.ipynb` and run in Collab!
 
 

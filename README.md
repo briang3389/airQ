@@ -34,6 +34,8 @@ Air-quality prediction and analysis framework using LSTMs and seq2seqs (transfor
 
 ## Configuration
 
+Open `src/main.ipynb` to see a complete run in Collab!
+
 Open `src/dagshub_run.ipynb` and run in Collab!
 
 Make sure you have a Dagshub account and copy your MLFlow link (where you would copy github URL)

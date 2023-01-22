@@ -2,6 +2,7 @@ import torch.optim as optimizer
 from arch import *
 from constants import *
 from data_prep import *
+import mlflow
 
 train_loss = []  # track training loss
 valid_loss = []  # track validation loss
@@ -86,17 +87,23 @@ f.close
 f = open("params.yml", "w")
 f.write("hello")
 f.close
+mlflow.set_tracking_uri("/content/airQ/mlruns")
+with mlflow.start_run():
+  mlflow.log_params(data_processing_dict)
+  for e in range(n_epochs):
+      
 
-for e in range(n_epochs):
+      avg_train_loss = train_epoch(train_dl, e)
+      avg_valid_loss = train_epoch(valid_dl, e)
 
-    avg_train_loss = train_epoch(train_dl, e)
-    avg_valid_loss = train_epoch(valid_dl, e)
-    num_epochs_run += 1
-    train_loss.append(avg_train_loss)
-    valid_loss.append(avg_valid_loss)
-    print(f"epoch {e}: avg train loss: {avg_train_loss} avg val loss: {avg_valid_loss}")
+      mlflow.log_metric("avg train loss",avg_train_loss, step=e)
+      mlflow.log_metric("avg validation loss",avg_valid_loss, step=e)
+      num_epochs_run += 1
+      train_loss.append(avg_train_loss)
+      valid_loss.append(avg_valid_loss)
+      print(f"epoch {e}: avg train loss: {avg_train_loss} avg val loss: {avg_valid_loss}")
 
-    if avg_valid_loss < best_val_loss:
-        best_val_loss = avg_valid_loss
-        torch.save(model, MODEL_PATH)
+      if avg_valid_loss < best_val_loss:
+          best_val_loss = avg_valid_loss
+          torch.save(model, MODEL_PATH)
 

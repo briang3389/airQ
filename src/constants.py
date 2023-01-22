@@ -48,6 +48,24 @@ SEQ2SEQ_VERBOSE = False
 # available model names
 LSTM_MODEL_NAME = "lstm"
 SEQ2SEQ_MODEL_NAME = "seq2seq"
+
+
+
+data_processing_dict = {
+"input data cols": INPUT_DATA_COLS,
+"output data cols": OUTPUT_DATA_COLS,
+
+"input features": INPUT_DATA_FEATURES,
+"output features": OUTPUT_DATA_FEATURES,
+
+"train test split" : PERCENT_TEST_TRAIN,
+"lookback" : LOOKBACK,
+"Predict" : PREDICT,
+"Batch Size" : BATCH_SIZE,
+"Shuffle test train sets" : SHUFFLE_TRAIN_TEST_DATA,
+"random split seed" : RANDOM_SPLIT_SEED
+}
+
 """
 seq2seq: input torch.Size([5, 8, 1])
 seq2seq: outputs torch.Size([1, 8, 1])
